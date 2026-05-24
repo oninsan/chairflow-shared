@@ -15,7 +15,7 @@ export type AllocationType =
   | "shop_share"
   | "platform_fee";
 
-export type StylistStatus = "active" | "inactive";
+export type StylistStatus = "active" | "inactive" | "invited";
 
 export type PayoutBatchStatus = "draft" | "completed";
 
@@ -40,8 +40,36 @@ export type StylistDto = {
   name: string;
   commissionPercent: string;
   gcashMobile: string | null;
+  phone: string | null;
+  userId: string | null;
   status: StylistStatus;
+  invitedAt: string | null;
+  inviteExpiresAt: string | null;
   createdAt: string;
+};
+
+export type StylistMembership = {
+  stylistId: string;
+  shopSlug: string;
+  shopName: string;
+  stylistName: string;
+  status: StylistStatus;
+};
+
+export type StylistShopsResponse = {
+  shops: StylistMembership[];
+};
+
+export type RedeemInviteResponse = {
+  stylistId: string;
+  shopSlug: string;
+  shopName: string;
+  stylistName: string;
+};
+
+export type CreateStylistInviteResponse = {
+  stylist: StylistDto;
+  inviteToken: string;
 };
 
 export type ServiceDto = {
