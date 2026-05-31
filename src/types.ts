@@ -149,6 +149,7 @@ export type PosTicketDto = {
   tipTotalCents: number;
   platformFeePercent: string | null;
   platformFeeCents: number;
+  platformFeeOverrideReason: string | null;
   lineItems: PosLineItemDto[];
   tips: PosTipDto[];
   payments: PosPaymentDto[];
