@@ -11,7 +11,8 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "default": "./dist/index.js"
-    }
+    },
+    "./tokens.css": "./dist/tokens.css"
   },
   "files": ["dist"],
   "publishConfig": {
@@ -22,9 +23,11 @@
     "url": "https://github.com/oninsan/chairflow-shared.git"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/build-tokens.mjs",
+    "build:tokens": "node scripts/build-tokens.mjs",
     "dev": "tsc --watch",
     "lint": "eslint src",
+    "check:tokens": "node scripts/check-no-raw-hex.mjs src",
     "test": "vitest run",
     "test:watch": "vitest"
   },
