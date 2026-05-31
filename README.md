@@ -42,6 +42,22 @@ Status/plan/priority/payment enums map to `{ label, tone }` via `src/status.ts`
 (`posTicketStatusBadge`, `planBadge`, `supportPriorityBadge`, …) so web and mobile
 badges stay in sync.
 
+### Animation tokens
+
+Timing/geometry tokens shared across admin (CSS keyframes) and stylist (Animated /
+Reanimated). CSS can't import TS, so web loaders hardcode the matching numbers with
+a comment pointing back here — keep them in sync.
+
+- `skeletonDurations` / `skeletonLayouts` (`src/skeleton.ts`) — skeleton shimmer
+  timings + layout recipe dimensions
+- `scissorsLoader` + `ScissorsLoaderTokens` (`src/scissors-loader.ts`) — branded
+  scissor-cut loader: `sizes` (sm/md/lg), `durations` (cutLoop, snip phases,
+  clippingFall), and `ratios` (hair/strand/scissors geometry). Web consumes
+  `durations.clippingFall`; mobile derives clipping cadence from its snip sequence
+  (see the file comment).
+
+After changing token values, `npm run build` here before consumers pick them up.
+
 ## Consumers
 
 - [`admin`](../admin) — platform admin + owner POS (imports `tokens.css`)
