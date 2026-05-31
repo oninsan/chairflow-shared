@@ -40,12 +40,19 @@ export type StylistDto = {
   name: string;
   commissionPercent: string;
   gcashMobile: string | null;
+  email: string | null;
   phone: string | null;
   userId: string | null;
   status: StylistStatus;
   invitedAt: string | null;
   inviteExpiresAt: string | null;
   createdAt: string;
+};
+
+export type InvitePreview = {
+  stylistName: string;
+  shopName: string;
+  emailMasked: string;
 };
 
 export type StylistMembership = {
@@ -58,6 +65,21 @@ export type StylistMembership = {
 
 export type StylistShopsResponse = {
   shops: StylistMembership[];
+};
+
+export type InviteAuthHintReason =
+  | "no_verified_email"
+  | "no_pending_invite"
+  | "email_mismatch"
+  | "invite_expired"
+  | "shop_inactive";
+
+export type InviteAuthHints = {
+  signedInEmailMasked: string | null;
+  reason: InviteAuthHintReason | null;
+  inviteEmailMasked: string | null;
+  stylistName: string | null;
+  shopName: string | null;
 };
 
 export type RedeemInviteResponse = {

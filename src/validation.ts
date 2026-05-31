@@ -66,3 +66,24 @@ export function isValidEmail(value: string): boolean {
   if (!trimmed) return false;
   return EMAIL_REGEX.test(trimmed);
 }
+
+/** Normalize invite email for storage and comparison. */
+export function normalizeInviteEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
+/** Practical RFC subset for stylist invite emails. */
+export function isValidInviteEmail(value: string): boolean {
+  return isValidEmail(value);
+}
+
+/** Mask email for invite preview UI (e.g. j••••@gmail.com). */
+export function maskEmail(email: string): string {
+  const normalized = normalizeInviteEmail(email);
+  const atIndex = normalized.indexOf("@");
+  if (atIndex <= 0) return "••••";
+  const local = normalized.slice(0, atIndex);
+  const domain = normalized.slice(atIndex);
+  const maskedLocal = local.length <= 1 ? "••••" : `${local[0]}••••`;
+  return `${maskedLocal}${domain}`;
+}
