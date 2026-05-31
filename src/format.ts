@@ -1,3 +1,5 @@
+import { parsePesoInput } from "./validation.js";
+
 const pesoFormatter = new Intl.NumberFormat("en-PH", {
   style: "currency",
   currency: "PHP",
@@ -7,6 +9,12 @@ const pesoFormatter = new Intl.NumberFormat("en-PH", {
 
 export function formatPeso(cents: number): string {
   return pesoFormatter.format(cents / 100);
+}
+
+/** Parse peso text to cents; returns 0 when input is empty or invalid. */
+export function parsePesoToCents(value: string): number {
+  const result = parsePesoInput(value);
+  return result.ok ? result.cents : 0;
 }
 
 export function formatPercent(decimal: string): string {
