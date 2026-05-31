@@ -5,12 +5,25 @@ import {
   formatPeso,
   formatTicketStatus,
   greetingForHour,
+  parsePesoToCents,
 } from "./format.js";
 
 describe("formatPeso", () => {
   it("formats cents as PHP currency", () => {
     expect(formatPeso(15000)).toContain("150");
     expect(formatPeso(15000)).toMatch(/₱|PHP/);
+  });
+});
+
+describe("parsePesoToCents", () => {
+  it("parses peso strings to integer cents", () => {
+    expect(parsePesoToCents("150")).toBe(15000);
+    expect(parsePesoToCents("₱1,234.56")).toBe(123456);
+  });
+
+  it("returns 0 for invalid input", () => {
+    expect(parsePesoToCents("")).toBe(0);
+    expect(parsePesoToCents("abc")).toBe(0);
   });
 });
 
